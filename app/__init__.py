@@ -4,13 +4,14 @@ from os import path
 from flask_login import LoginManager
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
+blog = "database.db"
 
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "helloworld"
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{blog}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2-binary://vero:1234567890@localhost:5432/blog"
     db.init_app(app)
 
     from .views import views
@@ -35,6 +36,6 @@ def create_app():
 
 
 def create_database(app):
-    if not path.exists("app/" + DB_NAME):
+    if not path.exists("app/" + blog):
         db.create_all(app=app)
         print("Created database!")
