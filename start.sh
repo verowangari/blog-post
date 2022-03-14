@@ -1,4 +1,4 @@
 
-export SECRET_KEY='SECRET_KEY'
+export SECRET_KEY='guess-me'
 
 python3 manage.py server
