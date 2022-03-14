@@ -1,28 +1,32 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
+import os
 from flask_login import LoginManager
 from config import config_options
 
 db = SQLAlchemy()
-blog = "database.db"
+
 
 
 def create_app(config_name):
     app = Flask(__name__)
-    # app.config['SECRET_KEY'] = "helloworld"
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{blog}'
-   
+    
     # Creating the app configurations
     app.config.from_object(config_options[config_name])
+    config_options[config_name].init_app(app)
+    app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get('DATABASE_URL')
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
     
+      
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
 
     from .views import views
     from .auth import auth
 
     app.register_blueprint(views, url_prefix="/")
-    app.register_blueprint(auth, url_prefix="/auth/")
+    app.register_blueprint(auth, url_prefix="/")
 
     from .models import User, Post, Comment, Like
 
@@ -39,7 +43,3 @@ def create_app(config_name):
     return app
 
 
-def create_database(app):
-    if not path.exists("app/" + blog):
-        db.create_all(app=app)
-        print("Created database!")
