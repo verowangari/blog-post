@@ -10,13 +10,15 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+      <!-- css link for style.css -->
+      <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     <script
       src="https://kit.fontawesome.com/999ca2bb93.js"
       crossorigin="anonymous"
     ></script>
     <title>{% block title %}{% endblock %}</title>
   </head>
-  <body>
+  <body style="   background-size: cover;background-image: url('{{ url_for('static', filename='images/bg.jpeg') }}') "  >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <button
@@ -40,15 +42,7 @@
         </div>
       </div>
     </nav>
-    <!-- quotes -->
-    <div class="container">
-      <button id="btnq">CLICK FOR TODAY'S QUOTE</button>
-      <div class="quote-box">
-        <p id="quote"> "Quote of the day.."</p>
-    <small id="author">Author</small>
-      </div>
-    </div> 
-    <!-- quotes -->
+   
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
@@ -62,7 +56,9 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
-    <div class="container">{% block content %}{% endblock %}</div>
+    <div class="container">{% block content %} 
+      
+      {% endblock %}</div>
    <!-- quotes script -->
    <script> 
      const quote =document.querySelector("#quote");

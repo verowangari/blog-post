@@ -1,6 +1,39 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
+   
     <h1 align="center">{% block header %}Posts{% endblock %}</h1>
+     <!-- quotes -->
+     <div class="container">
+        <button id="btnq">CLICK FOR TODAY'S QUOTE</button>
+        <div class="quote-box">
+          <p id="quote" style="color: white;"> "Quote of the day.."</p>
+      <small id="author" style="color: white;">Author</small>
+        </div>
+      </div> 
+      <!-- quotes -->
+      <!-- personal -->
+
+    <!-- Page Header -->
+    <!-- <header class="masthead" style="background-image: url('{{ url_for('static', filename='images/zoom-interview.png') }}')"> -->
+       
+        <!-- <img src="{{ url_for('static', filename='images/zoom-interview.png') }}" alt=""> -->
+        <div class="container" id="cleanblog" >
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1 align="center" style="color: white;">Welcome to <span> Clean Blog!</span></h1>
+                <h2 class="subheading" align="center" style="color: white;">You can create a blog post be clicking on the button in the bottom of the page.</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+  
+     
+  
+      <hr>
+  
+      <!-- personal -->
     <div id="posts">
       {% for post in posts %}
       <div class="card border-dark">
